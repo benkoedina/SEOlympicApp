@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SEOlympicApp</string>
+    <string name="login">Log In</string>
+    <string name="note">Notes</string>
+    <string name="calendar">Calendar</string>
+    <string name="contacts">Contacts</string>
+    <string name="email">Email</string>
+    <string name="welcome">Welcome to our App!</string>
+
+</resources>
