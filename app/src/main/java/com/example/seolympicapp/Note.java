@@ -5,11 +5,13 @@ public class Note {
      private  int id;
      private String note;
      private  String timestamp;
+     private  int user_id;
 
-    public Note(int id, String note, String timestamp) {
+    public Note(int id, String note, String timestamp, int user_id) {
         this.id = id;
         this.note = note;
         this.timestamp = timestamp;
+        this.user_id=user_id;
     }
 
     public Note( String note, String timestamp) {
@@ -19,6 +21,14 @@ public class Note {
     public  Note()
     {
 
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public int getId() {

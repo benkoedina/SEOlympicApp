@@ -2,17 +2,17 @@ package com.example.seolympicapp;
 
 public class User {
     private int id;
-    private String username;
+    private String email;
     private String password;
 
 
-    public User(int id, String username, String password) {
+    public User(int id, String email, String password) {
         this.id = id;
-        this.username = username;
+        this.email = email;
         this.password = password;
     }
-    public User(String username, String password) {
-        this.username = username;
+    public User(String email, String password) {
+        this.email = email;
         this.password = password;
     }
     public User()
@@ -27,12 +27,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -43,11 +43,5 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
+
 }

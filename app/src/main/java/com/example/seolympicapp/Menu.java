@@ -2,6 +2,7 @@ package com.example.seolympicapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -23,8 +24,8 @@ public class Menu extends AppCompatActivity {
         Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
         switch (item.getItemId()) {
             case R.id.note:
-                //   Intent intent = new Intent(MainActivity.this, Login.class);
-                //  startActivity(intent);
+                 Intent intent = new Intent(Menu.this, NoteActivity.class);
+                 startActivity(intent);
                 return true;
 
             default:
