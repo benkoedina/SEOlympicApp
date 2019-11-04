@@ -42,6 +42,20 @@ public class NoteActivity extends AppCompatActivity {
         for (Note note : allNotes) {
             Log.d("Tag Name", note.toString());
         }
+        note1.setNote("UPDATET");
+        db.updateNote(note1);
+   /*    db.deleteAllNotes(4);
+       // db.deleteOneNote(note1);
+       List<Note> allNotes1 = db.getUserNotes(4);
+       if(allNotes1.isEmpty())
+        {
+            Log.d("Tag Name","Nincs");
+        }
+        for (Note note : allNotes1) {
+            //Log.d("Tag Name","Nincs");
+            Log.d("Tag Name", note.toString());
+        }
+*/
 
 
 

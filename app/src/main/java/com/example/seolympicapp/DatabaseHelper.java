@@ -142,7 +142,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id;
 
     }
-    //get a Note
+    //get all Users Note
     public List<Note> getUserNotes(long user_id) {
 
         List<Note> notes = new ArrayList<Note>();
@@ -151,7 +151,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + USER_ID + " = " + user_id;
 
         //  Log.e(LOG, selectQuery);
-
         Cursor c = db.rawQuery(selectQuery, null);
         if (c.moveToFirst()) {
             do {
@@ -167,5 +166,81 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return notes;
     }
 
+    public Note getANote(long note_id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT  * FROM " + TABLE_NOTE + " WHERE "
+                + NOTE_ID + " = " + note_id;
+
+        Cursor c = db.rawQuery(selectQuery, null);
+        if (c != null)
+            c.moveToFirst();
+
+        Note n = new Note();
+        n.setUser_id(c.getInt(c.getColumnIndex(USER_ID)));
+        n.setNote((c.getString(c.getColumnIndex(NOTE_NOTE))));
+        n.setTimestamp(c.getString(c.getColumnIndex(NOTE_TIMESTAMP)));
+
+        return n;
+    }
+    //update user : email+pw
+
+    public int updateUser(User user) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(USER_EMAIL, user.getEmail());
+        values.put(USER_PW, user.getPassword());
+
+        // updating row
+        return db.update(TABLE_USER, values, USER_ID + " = ?",
+                new String[] { String.valueOf(user.getId()) });
+    }
+    //update the Note
+    public int updateNote(Note note) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(NOTE_NOTE, note.getNote());
+
+        // updating row
+        return db.update(TABLE_NOTE, values, NOTE_ID + " = ?",
+                new String[] { String.valueOf(note.getId()) });
+    }
+
+    public void deleteAllNotes(int user_id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+            db.delete(TABLE_NOTE, USER_ID + " = ?",
+                    new String[] { String.valueOf(user_id) });
+
+    }
+
+    public void deleteOneNote(Note note)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_NOTE, NOTE_ID + " = ?",
+                new String[] { String.valueOf(note.getId()) });
+
+    }
+    public void deleteUser(User user)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_USER, USER_ID + " = ?",
+                new String[] { String.valueOf(user.getId()) });
+    }
+
+    public void closeDB() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        if (db != null && db.isOpen())
+            db.close();
+    }
 
 }
