@@ -1,19 +1,37 @@
 package com.example.seolympicapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.appcompat.widget.Toolbar;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+
 public class NoteActivity extends AppCompatActivity {
 
     DatabaseHelper db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +40,11 @@ public class NoteActivity extends AppCompatActivity {
 
         db = new DatabaseHelper(getApplicationContext());
 
-        Date c = Calendar.getInstance().getTime();
+
+      /*  Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
         String formattedDate = df.format(c);
 
-        TextView tv1 = (TextView)findViewById(R.id.textView1);
-        TextView tv2 = (TextView)findViewById(R.id.textView2);
 
         User user1 = new User(4,"benkoedina@gmail.com","12345");
         long userid = db.createUser(user1);
@@ -61,4 +78,6 @@ public class NoteActivity extends AppCompatActivity {
 
 
     }
+
+
 }
