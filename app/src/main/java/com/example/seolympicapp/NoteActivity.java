@@ -40,40 +40,33 @@ public class NoteActivity extends AppCompatActivity {
 
         db = new DatabaseHelper(getApplicationContext());
 
-
-      /*  Date c = Calendar.getInstance().getTime();
+        Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
         String formattedDate = df.format(c);
 
+        db.deleteAllNotes();
+        db.deleteAllUser();
 
-        User user1 = new User(4,"benkoedina@gmail.com","12345");
-        long userid = db.createUser(user1);
+        User user = new User (1,"benkoedina98@gmail.com","12345" );
 
-        Note note1= new Note(6,"Probalni az adatbazist",formattedDate,4);
-        Note note2= new Note(7,"Probalni az adatbazist",formattedDate,4);
-
-       long noteid1=db.createNote(note1);
-       long noteid2 = db.createNote(note2);
-
-        List<Note> allNotes = db.getUserNotes(4);
+       Note notes = new Note(1,"Proba",formattedDate,1);
+        Note notes1 = new Note(2,"Proba2",formattedDate,1);
+       long n = db.createNote(notes);
+       long n1 = db.createNote(notes1);
+        List<Note> allNotes = db.getUserNotes(1);
         for (Note note : allNotes) {
             Log.d("Tag Name", note.toString());
         }
-        note1.setNote("UPDATET");
-        db.updateNote(note1);
-   /*    db.deleteAllNotes(4);
-       // db.deleteOneNote(note1);
-       List<Note> allNotes1 = db.getUserNotes(4);
-       if(allNotes1.isEmpty())
-        {
-            Log.d("Tag Name","Nincs");
-        }
-        for (Note note : allNotes1) {
-            //Log.d("Tag Name","Nincs");
-            Log.d("Tag Name", note.toString());
-        }
-*/
 
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        MyListAdapter adapter = new MyListAdapter(allNotes);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
+
+
+        db.closeDB();
 
 
 

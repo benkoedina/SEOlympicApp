@@ -236,6 +236,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.delete(TABLE_USER, USER_ID + " = ?",
                 new String[] { String.valueOf(user.getId()) });
     }
+    public void deleteAllUser()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("delete from " + TABLE_USER );
+    }
+    public void deleteAllNotes()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("delete from " + TABLE_NOTE );
+    }
 
     public void closeDB() {
         SQLiteDatabase db = this.getReadableDatabase();
