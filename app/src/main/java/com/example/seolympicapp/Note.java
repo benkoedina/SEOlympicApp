@@ -18,6 +18,11 @@ public class Note {
         this.note = note;
         this.timestamp = timestamp;
     }
+    public Note( String note, String timestamp, int user_id) {
+        this.note = note;
+        this.timestamp = timestamp;
+        this.user_id=user_id;
+    }
     public  Note()
     {
 

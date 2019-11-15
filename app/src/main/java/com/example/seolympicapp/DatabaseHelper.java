@@ -221,12 +221,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public void deleteOneNote(Note note)
+    public void deleteOneNote(int id)
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.delete(TABLE_NOTE, NOTE_ID + " = ?",
-                new String[] { String.valueOf(note.getId()) });
+                new String[] { String.valueOf(id) });
 
     }
     public void deleteUser(User user)
