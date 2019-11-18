@@ -36,7 +36,7 @@ public class Menu extends AppCompatActivity {
                  startActivity(intent);
                 return true;
             case R.id.contacts:
-                Intent intentContact = new Intent(Menu.this, ContactActivity.class);
+                Intent intentContact = new Intent(Menu.this, ClientsActivity.class);
                 intentContact.putExtra("Id", id);
                 startActivity(intentContact);
             default:

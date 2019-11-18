@@ -313,18 +313,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return clients;
     }
 
-    public int updateClient(Client client) {
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-
-     //   values.put(NOTE_NOTE, note.getNote());
-
-        // updating row
-      //  return db.update(TABLE_NOTE, values, NOTE_ID + " = ?",
-           //     new String[] { String.valueOf(note.getId()) });
-    }
 
 
     public void deleteAllClients()
