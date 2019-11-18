@@ -35,7 +35,10 @@ public class Menu extends AppCompatActivity {
                  intent.putExtra("Id",id);
                  startActivity(intent);
                 return true;
-
+            case R.id.contacts:
+                Intent intentContact = new Intent(Menu.this, ContactActivity.class);
+                intentContact.putExtra("Id", id);
+                startActivity(intentContact);
             default:
                 return super.onOptionsItemSelected(item);
         }
