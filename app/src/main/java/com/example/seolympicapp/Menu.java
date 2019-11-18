@@ -13,6 +13,7 @@ public class Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
     }
 
     @Override
@@ -21,10 +22,17 @@ public class Menu extends AppCompatActivity {
         return true;
     }
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        Intent mainIntent = getIntent();
+        Bundle extras = mainIntent.getExtras();
+        int id = extras.getInt("Id");
+    //    Toast.makeText(this, "Id " + id, Toast.LENGTH_SHORT).show();
+
         Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
         switch (item.getItemId()) {
             case R.id.note:
                  Intent intent = new Intent(Menu.this, NoteActivity.class);
+                 intent.putExtra("Id",id);
                  startActivity(intent);
                 return true;
 

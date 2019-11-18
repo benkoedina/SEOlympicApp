@@ -11,6 +11,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -49,12 +50,13 @@ public class NoteActivity extends AppCompatActivity {
         final String formattedDate = df.format(c);
 
         db = new DatabaseHelper(getApplicationContext());
-        db.deleteAllUser();
-        User user = new User (1,"benkoedina98@gmail.com","12345" );
 
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+         final  int id = extras.getInt("Id");
         Button bt_addNew = findViewById(R.id.bt_add);
 
-        allNotes = db.getUserNotes(1);
+        allNotes = db.getUserNotes(id);
         for (Note note : allNotes) {
             Log.d("Tag Name", note.toString());
         }
@@ -62,7 +64,7 @@ public class NoteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-            openDialog();
+            openDialog(id);
 
             }});
 
@@ -84,7 +86,7 @@ public class NoteActivity extends AppCompatActivity {
         return db.getUserNotes(user_id);
     }
 
-    private void openDialog()
+    private void openDialog(final int id)
     {
 
         LayoutInflater inflater = LayoutInflater.from(NoteActivity.this);
@@ -100,7 +102,7 @@ public class NoteActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Log.d("Note",et_note.getText().toString());
-                Note note = new Note (checkMaxId()+1,et_note.getText().toString(),dateFormat(),1);
+                Note note = new Note (checkMaxId()+1,et_note.getText().toString(),dateFormat(),id);
                 db.createNote(note);
                 allNotes.add(note);
                 adapter.notifyDataSetChanged();
