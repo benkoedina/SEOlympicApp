@@ -19,6 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //table names
     private static final String TABLE_USER = "user";
     private static final String TABLE_NOTE = "note";
+    private static final String TABLE_CLIENT = "client";
 
     //common column names
     private static final String USER_ID = "user_id";
@@ -33,6 +34,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String NOTE_NOTE="note_note";
     private static final String NOTE_TIMESTAMP="note_time";
 
+    //client column names
+
+    private static final String CLIENT_ID="client_id";
+    private static final String CLIENT_NAME="client_name";
+    private static final String CLIENT_EMAIL="client_email";
+    private static final String CLIENT_WEBSITE="client_website";
+    private static final String CLIENT_TEL="client_tel";
+    private static final String CLIENT_COMPANY="client_company";
+    private static final String CLIENT_ADDRESS="client_address";
+
+
     //create table statements
 
     private static final String CREATE_TABLE_USER = "CREATE TABLE "
@@ -42,6 +54,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_NOTE = "CREATE TABLE "
             + TABLE_NOTE + "(" + NOTE_ID + " INTEGER PRIMARY KEY," + NOTE_NOTE
             + " TEXT," + NOTE_TIMESTAMP + " DATETIME," + USER_ID + " INTEGER" + ")";
+
+    private static final String CREATE_TABLE_CLIENTS = "CREATE TABLE "
+            + TABLE_CLIENT + "(" + CLIENT_ID + " INTEGER PRIMARY KEY," + CLIENT_NAME
+            + " TEXT," + CLIENT_EMAIL + " TEXT," + CLIENT_WEBSITE + " TEXT," + CLIENT_TEL
+            + " TEXT," + CLIENT_COMPANY + " TEXT," + CLIENT_ADDRESS + " TEXT," + USER_ID + " INTEGER" + ")";
 
 
     //constructor
@@ -54,6 +71,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // creating required tables
         db.execSQL(CREATE_TABLE_USER);
         db.execSQL(CREATE_TABLE_NOTE);
+        db.execSQL(CREATE_TABLE_CLIENTS);
     }
 
     @Override
@@ -61,6 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CLIENT);
 
         // create new tables
         onCreate(db);
@@ -248,7 +267,80 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("delete from " + TABLE_NOTE );
     }
+    // create Note
+    public long createClient(Client client) {
 
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(CLIENT_ID, client.getId());
+        values.put(CLIENT_NAME, client.getName());
+        values.put(CLIENT_EMAIL, client.getEmail());
+        values.put(CLIENT_WEBSITE, client.getWebsite());
+        values.put(CLIENT_TEL, client.getTel());
+        values.put(CLIENT_COMPANY, client.getCompany());
+        values.put(CLIENT_ADDRESS, client.getAddress());
+        values.put(USER_ID,client.getUser_id());
+
+        // insert row
+        long id = db.insert(TABLE_CLIENT, null, values);
+        return id;
+
+    }
+
+    public List<Client> getUserClients(long user_id) {
+
+        List<Client> clients = new ArrayList<Client>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT  * FROM " + TABLE_CLIENT + " WHERE "
+                + USER_ID + " = " + user_id;
+
+        //  Log.e(LOG, selectQuery);
+        Cursor c = db.rawQuery(selectQuery, null);
+        if (c.moveToFirst()) {
+            do {
+                Client client = new Client();
+                client.setId(c.getInt(c.getColumnIndex(CLIENT_ID)));
+                client.setName((c.getString(c.getColumnIndex(CLIENT_NAME))));
+                client.setEmail(c.getString(c.getColumnIndex(CLIENT_EMAIL)));
+                client.setWebsite(c.getString(c.getColumnIndex(CLIENT_WEBSITE)));
+                client.setTel(c.getString(c.getColumnIndex(CLIENT_TEL)));
+                client.setCompany(c.getString(c.getColumnIndex(CLIENT_COMPANY)));
+                client.setAddress(c.getString(c.getColumnIndex(CLIENT_ADDRESS)));
+                clients.add(client);
+            }while (c.moveToNext());
+        }
+        return clients;
+    }
+
+    public int updateClient(Client client) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+     //   values.put(NOTE_NOTE, note.getNote());
+
+        // updating row
+      //  return db.update(TABLE_NOTE, values, NOTE_ID + " = ?",
+           //     new String[] { String.valueOf(note.getId()) });
+    }
+
+
+    public void deleteAllClients()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("delete from " + TABLE_CLIENT );
+    }
+    public void deleteAllClients(int user_id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_CLIENT, USER_ID + " = ?",
+                new String[] { String.valueOf(user_id) });
+
+    }
     public void closeDB() {
         SQLiteDatabase db = this.getReadableDatabase();
         if (db != null && db.isOpen())
