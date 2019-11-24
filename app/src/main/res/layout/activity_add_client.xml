@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".AddClientActivity">
 
     <TextView
-        android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name:"
+        android:textSize="25dp"
+        android:textColor="@color/colorGold"
+        android:gravity="center"
+        android:fontFamily="monospace"
+        android:text="Add a New Client"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        />
+
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
         android:fontFamily="monospace"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
@@ -18,60 +35,75 @@
         android:textSize="25dp"
         android:textColor="@color/colorGold"
         />
-    <TextView
+    <EditText
         android:fontFamily="monospace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_email"
-        android:text="Email:"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:textSize="17dp"
-    />
-    <TextView
-        android:fontFamily="monospace"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_website"
-        android:text="Website:"
+        android:id="@+id/et_email"
+        android:hint="Email"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:textSize="17dp"
         />
-    <TextView
+    <EditText
+        android:fontFamily="monospace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tel:"
-        android:id="@+id/tv_tel"
+        android:id="@+id/et_website"
+        android:hint="Website"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textSize="17dp"
+        />
+    <EditText
+        android:id="@+id/et_tel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tel"
         android:fontFamily="monospace"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:textSize="17dp"
         />
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_company"
-        android:text="Company:"
+        android:id="@+id/et_company"
+        android:hint="Company"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:textSize="17dp"
         android:fontFamily="monospace"
         />
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_address"
-        android:text="Adress:"
+        android:id="@+id/et_address"
+        android:hint="Address"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:textSize="17dp"
         android:fontFamily="monospace"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:id="@+id/bt_addClientForm"
+        android:layout_marginLeft="150dp"
+        android:layout_marginRight="25dp"
+        android:textColor="@color/colorGold"
+        android:text="Add"
+        android:fontFamily="monospace"
+        android:textSize="20dp"
+        android:gravity="center"
+
         />
 
 </LinearLayout>

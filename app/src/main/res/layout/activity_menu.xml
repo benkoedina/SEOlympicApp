@@ -7,4 +7,107 @@
     android:layout_height="match_parent"
     tools:context=".Menu">
 
+    <Button
+        android:id="@+id/button_calendar"
+        android:layout_width="171dp"
+        android:layout_height="91dp"
+        android:layout_marginBottom="168dp"
+        android:text="Calendar"
+        android:textAlignment="center"
+        android:textColor="@color/colorGold"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_email"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_notes"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/button_clients"
+        android:layout_width="175dp"
+        android:layout_height="91dp"
+        android:layout_marginTop="80dp"
+        android:text="Clients"
+        android:textAlignment="center"
+        android:textColor="@color/colorGold"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.879"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+
+        android:layout_width="363dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginBottom="150dp"
+        android:fontFamily="monospace"
+        android:text="SEOlympic"
+        android:textAlignment="center"
+        android:textColor="@color/colorGold"
+        android:textSize="36dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.229" />
+
+    <TextView
+
+        android:id="@+id/textView"
+        android:layout_width="363dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginBottom="150dp"
+        android:fontFamily="monospace"
+        android:text="Digital Marketing Agency"
+        android:textAlignment="center"
+        android:textColor="@color/colorGold"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.38" />
+
+    <Button
+        android:id="@+id/button_notes"
+        android:layout_width="171dp"
+        android:layout_height="91dp"
+        android:layout_marginTop="80dp"
+        android:text="Notes"
+        android:textAlignment="center"
+        android:textColor="@color/colorGold"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/button_clients"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/button_email"
+        android:layout_width="171dp"
+        android:layout_height="91dp"
+        android:layout_marginBottom="168dp"
+        android:text="E-mail"
+        android:textAlignment="center"
+        android:textColor="@color/colorGold"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/button_notes"
+        app:layout_constraintTop_toBottomOf="@+id/button_clients"
+        app:layout_constraintVertical_bias="1.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
