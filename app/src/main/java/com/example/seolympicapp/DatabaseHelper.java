@@ -290,7 +290,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public List<Client> getUserClients(long user_id) {
 
-        List<Client> clients = new ArrayList<Client>();
+        List<Client> clients = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery = "SELECT  * FROM " + TABLE_CLIENT + " WHERE "
                 + USER_ID + " = " + user_id;
@@ -307,14 +307,54 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 client.setTel(c.getString(c.getColumnIndex(CLIENT_TEL)));
                 client.setCompany(c.getString(c.getColumnIndex(CLIENT_COMPANY)));
                 client.setAddress(c.getString(c.getColumnIndex(CLIENT_ADDRESS)));
+                client.setUser_id(c.getInt(c.getColumnIndex(USER_ID)));
                 clients.add(client);
             }while (c.moveToNext());
         }
         return clients;
     }
 
+    public Client getAClient(long client_id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT  * FROM " + TABLE_CLIENT + " WHERE "
+                + CLIENT_ID + " = " + client_id;
+
+        Cursor c = db.rawQuery(selectQuery, null);
+        if (c != null)
+            c.moveToFirst();
 
 
+        Client client = new Client();
+        client.setUser_id(c.getInt(c.getColumnIndex(USER_ID)));
+        client.setName(c.getString(c.getColumnIndex(CLIENT_NAME)));
+        client.setEmail(c.getString(c.getColumnIndex(CLIENT_EMAIL)));
+        client.setWebsite(c.getString(c.getColumnIndex(CLIENT_WEBSITE)));
+        client.setTel(c.getString(c.getColumnIndex(CLIENT_TEL)));
+        client.setCompany(c.getString(c.getColumnIndex(CLIENT_COMPANY)));
+        client.setAddress(c.getString(c.getColumnIndex(CLIENT_ADDRESS)));
+
+
+        return client;
+    }
+
+    public int updateClient(Client client) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(CLIENT_NAME,client.getName());
+        values.put(CLIENT_EMAIL,client.getEmail());
+        values.put(CLIENT_WEBSITE,client.getWebsite());
+        values.put(CLIENT_TEL,client.getTel());
+        values.put(CLIENT_ADDRESS,client.getAddress());
+        values.put(CLIENT_COMPANY,client.getCompany());
+
+        // updating row
+        return db.update(TABLE_CLIENT, values, CLIENT_ID + " = ?",
+                new String[] { String.valueOf(client.getId()) });
+    }
     public void deleteAllClients()
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -327,6 +367,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.delete(TABLE_CLIENT, USER_ID + " = ?",
                 new String[] { String.valueOf(user_id) });
+    }
+    public void deleteAClient(int client_id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_CLIENT, CLIENT_ID + " = ?",
+                new String[] { String.valueOf(client_id) });
 
     }
     public void closeDB() {

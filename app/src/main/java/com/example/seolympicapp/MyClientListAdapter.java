@@ -1,18 +1,20 @@
 package com.example.seolympicapp;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MyClientListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder> {
+public class MyClientListAdapter extends RecyclerView.Adapter<MyClientListAdapter.ViewHolder> {
 
     private List<Client> clientList;
     private Context context;
@@ -28,20 +30,33 @@ public class MyClientListAdapter extends RecyclerView.Adapter<MyListAdapter.View
 
     @NonNull
     @Override
-    public MyListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyClientListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem = layoutInflater.inflate(R.layout.contact_item, parent, false);
-        MyListAdapter.ViewHolder viewHolder = new MyListAdapter.ViewHolder(listItem);
+        ViewHolder viewHolder = new ViewHolder(listItem);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyListAdapter.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final Client myClient= clientList.get(position);
-        //holder.textView.setText(myNote.getNote());
+        holder.tv_name.setText(myClient.getName());
+        holder.tv_email.setText(myClient.getEmail());
+        holder.tv_website.setText(myClient.getWebsite());
+        holder.tv_tel.setText(myClient.getTel());
+        holder.tv_company.setText(myClient.getCompany());
+        holder.tv_address.setText(myClient.getAddress());
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Position",position+"");
+            }
+        });
+
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -69,7 +84,7 @@ public class MyClientListAdapter extends RecyclerView.Adapter<MyListAdapter.View
             this.tv_tel=itemView.findViewById(R.id.tv_tel);
             this.tv_company=itemView.findViewById(R.id.tv_company);
             this.tv_address=itemView.findViewById(R.id.tv_address);
-            linearLayout =itemView.findViewById(R.id.linear_layout);
+            linearLayout =itemView.findViewById(R.id.linear_layout_clients);
         }
     }
 }

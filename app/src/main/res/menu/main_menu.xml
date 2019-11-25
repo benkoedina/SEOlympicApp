@@ -5,7 +5,7 @@
     <item android:id="@+id/calendar"
         android:title="@string/calendar" />
     <item android:id="@+id/contacts"
-        android:title="@string/contacts" />
+        android:title="Clients" />
     <item android:id="@+id/email"
         android:title="@string/email" />
 </menu>

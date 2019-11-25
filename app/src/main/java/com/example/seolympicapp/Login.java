@@ -26,10 +26,10 @@ public class Login extends AppCompatActivity {
 
         db = new DatabaseHelper(getApplicationContext());
 
-       User user1=new User(1, "benko@seolympic.com","12345" );
+     /*  User user1=new User(1, "benko@seolympic.com","12345" );
         User user2=new User(2, "makkai@seolympic.com","12345");
         db.createUser(user1);
-        db.createUser(user2);
+        db.createUser(user2);*/
 
         final List<User> users = db.getAllUsers();
 

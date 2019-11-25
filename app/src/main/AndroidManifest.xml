@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AddClientActivity"></activity>
-        <activity android:name=".ContactActivity" />
+        <activity android:name=".ClientsActivity" />
         <activity android:name=".NoteActivity" />
         <activity android:name=".Menu" />
         <activity android:name=".Login" />

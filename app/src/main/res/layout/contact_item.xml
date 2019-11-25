@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/linear_layout_clients"
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/tv_name"
@@ -22,7 +23,6 @@
         android:fontFamily="monospace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_email"
         android:text="Email:"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
@@ -33,8 +33,39 @@
         android:fontFamily="monospace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_website"
+        android:text="Email:"
+        android:id="@+id/tv_email"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textSize="17dp"
+        />
+    <TextView
+        android:fontFamily="monospace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Website:"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textSize="17dp"
+        />
+    <TextView
+        android:fontFamily="monospace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Website:"
+        android:id="@+id/tv_website"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textSize="17dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tel:"
+        android:fontFamily="monospace"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -54,8 +85,28 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Company:"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textSize="17dp"
+        android:fontFamily="monospace"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/tv_company"
         android:text="Company:"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textSize="17dp"
+        android:fontFamily="monospace"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Adress:"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
