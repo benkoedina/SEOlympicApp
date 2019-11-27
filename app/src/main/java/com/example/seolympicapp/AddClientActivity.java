@@ -15,7 +15,7 @@ public class AddClientActivity extends AppCompatActivity {
 
 
     DatabaseHelper db;
-    List<Client> allClients;
+   // List<Client> allClients;
     EditText et_name;
     EditText et_email;
     EditText et_website;
@@ -29,10 +29,11 @@ public class AddClientActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        final  int id = extras.getInt("Id");
+        final  int id = extras.getInt("id");
+        Log.d("id", id+"");
 
         db = new DatabaseHelper(getApplicationContext());
-        allClients = db.getUserClients(id);
+        final List<Client> allClients = db.getUserClients(id);
 
 
        et_name = findViewById(R.id.et_name);
@@ -56,16 +57,19 @@ public class AddClientActivity extends AppCompatActivity {
                 String company = et_company.getText().toString();
                 String address = et_address.getText().toString();
 
-                Client client = new Client(checkMaxId()+1,name,email,website,tel,company,address,id);
+                Client client = new Client(checkMaxId(allClients)+1,name,email,website,tel,company,address,id);
                 Log.d("addC", client.toString());
                 db.createClient(client);
                 Log.d("addC",db.getAClient(3).toString());
+                Intent intent=new Intent();
+                intent.putExtra("MESSAGE","Sikerult");
+                setResult(1,intent);
             }
         });
 
 
     }
-    private int checkMaxId()
+    private int checkMaxId(List<Client> allClients)
     {
         int id=0;
         for (Client c: allClients) {
