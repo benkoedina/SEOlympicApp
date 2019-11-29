@@ -18,7 +18,7 @@
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_email"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.88"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_notes"
         app:layout_constraintVertical_bias="1.0" />
@@ -27,13 +27,12 @@
         android:id="@+id/button_clients"
         android:layout_width="175dp"
         android:layout_height="91dp"
-        android:layout_marginTop="80dp"
         android:text="Clients"
         android:textAlignment="center"
         android:textColor="@color/colorGold"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.879"
+        app:layout_constraintHorizontal_bias="0.864"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -84,7 +83,6 @@
         android:id="@+id/button_notes"
         android:layout_width="171dp"
         android:layout_height="91dp"
-        android:layout_marginTop="80dp"
         android:text="Notes"
         android:textAlignment="center"
         android:textColor="@color/colorGold"

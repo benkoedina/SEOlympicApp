@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class Menu extends AppCompatActivity {
@@ -13,6 +15,31 @@ public class Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        Intent mainIntent = getIntent();
+        Bundle extras = mainIntent.getExtras();
+       final int id = extras.getInt("Id");
+
+        Button bt_notes = findViewById(R.id.button_notes);
+        Button bt_clients = findViewById(R.id.button_clients);
+
+        bt_notes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Menu.this, NoteActivity.class);
+                intent.putExtra("Id",id);
+                startActivity(intent);
+            }
+        });
+
+        bt_clients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentContact = new Intent(Menu.this, ClientsActivity.class);
+                intentContact.putExtra("Id", id);
+                startActivity(intentContact);
+            }
+        });
 
     }
 
@@ -39,6 +66,9 @@ public class Menu extends AppCompatActivity {
                 Intent intentContact = new Intent(Menu.this, ClientsActivity.class);
                 intentContact.putExtra("Id", id);
                 startActivity(intentContact);
+            case R.id.email:
+                Intent intentEmail = new Intent(Menu.this, EmailActivity.class);
+                startActivity(intentEmail);
             default:
                 return super.onOptionsItemSelected(item);
         }
