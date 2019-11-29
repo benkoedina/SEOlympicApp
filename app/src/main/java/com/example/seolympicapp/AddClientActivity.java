@@ -33,8 +33,16 @@ public class AddClientActivity extends AppCompatActivity {
         Log.d("id", id+"");
 
         db = new DatabaseHelper(getApplicationContext());
-        final List<Client> allClients = db.getUserClients(id);
+       // db.deleteAllClients(1);
+        //
+   //     final List<Client> allClients = db.getUserClients(id);
+      final  List<Client> allClientA = db.getAllClients();
+       for(Client c : allClientA)
+       {
+           Log.d("client id", c.getId()+"");
+       }
 
+       Log.d("client",checkMaxId(allClientA)+1+"");
 
        et_name = findViewById(R.id.et_name);
        et_email = findViewById(R.id.et_email);
@@ -57,10 +65,10 @@ public class AddClientActivity extends AppCompatActivity {
                 String company = et_company.getText().toString();
                 String address = et_address.getText().toString();
 
-                Client client = new Client(checkMaxId(allClients)+1,name,email,website,tel,company,address,id);
+                Client client = new Client(checkMaxId(allClientA)+1,name,email,website,tel,company,address,id);
                 Log.d("addC", client.toString());
                 db.createClient(client);
-                Log.d("addC",db.getAClient(3).toString());
+                Log.d("addC",db.getAClient(id).toString());
                 Intent intent=new Intent();
                 intent.putExtra("MESSAGE","Sikerult");
                 setResult(1,intent);
@@ -79,5 +87,10 @@ public class AddClientActivity extends AppCompatActivity {
             }
         }
         return id;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

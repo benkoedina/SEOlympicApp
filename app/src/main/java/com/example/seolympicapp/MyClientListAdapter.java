@@ -1,6 +1,8 @@
 package com.example.seolympicapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +53,22 @@ public class MyClientListAdapter extends RecyclerView.Adapter<MyClientListAdapte
             @Override
             public void onClick(View view) {
                 Log.d("Position",position+"");
+                final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Your Note");
+                builder.setMessage("Do you want to delete this contact?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Client client = clientList.get(position);
+                        clientList.remove(position);
+                        notifyItemRemoved(position);
+                        db.deleteAClient(client.getId());
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
             }
         });
 

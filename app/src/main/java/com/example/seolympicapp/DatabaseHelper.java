@@ -338,6 +338,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return client;
     }
 
+    public List<Client> getAllClients() {
+        List<Client> clients= new ArrayList<Client>();
+        String selectQuery = "SELECT  * FROM " + TABLE_CLIENT;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                Client client = new Client();
+                client.setId(c.getInt(c.getColumnIndex(CLIENT_ID)));
+                client.setUser_id(c.getInt(c.getColumnIndex(USER_ID)));
+                client.setName(c.getString(c.getColumnIndex(CLIENT_NAME)));
+                client.setEmail(c.getString(c.getColumnIndex(CLIENT_EMAIL)));
+                client.setWebsite(c.getString(c.getColumnIndex(CLIENT_WEBSITE)));
+                client.setTel(c.getString(c.getColumnIndex(CLIENT_TEL)));
+                client.setCompany(c.getString(c.getColumnIndex(CLIENT_COMPANY)));
+                client.setAddress(c.getString(c.getColumnIndex(CLIENT_ADDRESS)));
+
+                // adding to todo list
+                clients.add(client);
+            } while (c.moveToNext());
+        }
+        return clients;
+    }
     public int updateClient(Client client) {
 
         SQLiteDatabase db = this.getWritableDatabase();

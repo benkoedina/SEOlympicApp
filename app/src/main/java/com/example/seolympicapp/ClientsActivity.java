@@ -21,6 +21,7 @@ public class ClientsActivity extends AppCompatActivity {
    List<Client> allClients;
     RecyclerView recyclerView;
     MyClientListAdapter adapter;
+    int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +40,7 @@ public class ClientsActivity extends AppCompatActivity {
 
         Intent intentGet = getIntent();
         Bundle extras = intentGet.getExtras();
-        final  int id = extras.getInt("Id");
+       id = extras.getInt("Id");
 
         allClients =  db.getUserClients(id);
         for(Client c:allClients)
@@ -80,10 +81,18 @@ public class ClientsActivity extends AppCompatActivity {
         // check if the request code is same as what is passed  here it is 2
         if(requestCode==1)
         {
-
             String message = data.getStringExtra("MESSAGE");
+            allClients = db.getUserClients(id); for(Client c:allClients)
+        {
+            Log.d("Notify elotti",c.toString());
+        }
+
+            adapter = new MyClientListAdapter(allClients,ClientsActivity.this,db);
+            recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
             Log.d("Sikerult",message);
         }
     }
+
+
 }
