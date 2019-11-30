@@ -81,7 +81,9 @@ public class ClientsActivity extends AppCompatActivity {
         // check if the request code is same as what is passed  here it is 2
         if(requestCode==1)
         {
-            String message = data.getStringExtra("MESSAGE");
+            Log.d("Lekeres elotti",requestCode + "");
+       //     String message = data.getStringExtra("MESSAGE");
+        //    Log.d("Lekeres elotti",message);
             allClients = db.getUserClients(id); for(Client c:allClients)
         {
             Log.d("Notify elotti",c.toString());
@@ -90,7 +92,7 @@ public class ClientsActivity extends AppCompatActivity {
             adapter = new MyClientListAdapter(allClients,ClientsActivity.this,db);
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-            Log.d("Sikerult",message);
+            //Log.d("Sikerult",message);
         }
     }
 

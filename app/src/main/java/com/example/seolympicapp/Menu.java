@@ -22,6 +22,25 @@ public class Menu extends AppCompatActivity {
 
         Button bt_notes = findViewById(R.id.button_notes);
         Button bt_clients = findViewById(R.id.button_clients);
+        Button bt_reminder = findViewById(R.id.button_reminder);
+        Button bt_email = findViewById(R.id.button_email);
+
+
+
+        bt_email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentEmail = new Intent(Menu.this, EmailActivity.class);
+                startActivity(intentEmail);
+            }
+        });
+        bt_reminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentReminder = new Intent( Menu.this, ReminderActivity.class);
+                startActivity((intentReminder));
+            }
+        });
 
         bt_notes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +88,9 @@ public class Menu extends AppCompatActivity {
             case R.id.email:
                 Intent intentEmail = new Intent(Menu.this, EmailActivity.class);
                 startActivity(intentEmail);
+            case R.id.reminder:
+                Intent intentReminder = new Intent( Menu.this, ReminderActivity.class);
+                startActivity((intentReminder));
             default:
                 return super.onOptionsItemSelected(item);
         }

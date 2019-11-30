@@ -69,8 +69,9 @@ public class AddClientActivity extends AppCompatActivity {
                 Log.d("addC", client.toString());
                 db.createClient(client);
                 Log.d("addC",db.getAClient(id).toString());
+
                 Intent intent=new Intent();
-                intent.putExtra("MESSAGE","Sikerult");
+          //      intent.putExtra("MESSAGE","Sikerult");
                 setResult(1,intent);
             }
         });
@@ -89,8 +90,5 @@ public class AddClientActivity extends AppCompatActivity {
         return id;
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
+
 }
