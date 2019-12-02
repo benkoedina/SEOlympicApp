@@ -24,13 +24,17 @@ public class Login extends AppCompatActivity {
 
         Button button_login = (Button)findViewById(R.id.button_login);
 
+        //database connection
         db = new DatabaseHelper(getApplicationContext());
 
-     /*  User user1=new User(1, "benko@seolympic.com","12345" );
+
+     /* -we use this if we change the emulator or the device
+        User user1=new User(1, "benko@seolympic.com","12345" );
         User user2=new User(2, "makkai@seolympic.com","12345");
         db.createUser(user1);
         db.createUser(user2);*/
 
+        //we get the users from the database
         final List<User> users = db.getAllUsers();
 
         button_login.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +47,7 @@ public class Login extends AppCompatActivity {
                 String email = et_email.getText().toString();
                 String password = et_password.getText().toString();
 
-
+                //checking if the fields are empty
                 if (email.isEmpty() || password.isEmpty())
                 {
                     et_email.setError("All the fileds are required");
@@ -54,12 +58,14 @@ public class Login extends AppCompatActivity {
                 }
                 else {
                     User userEdina = users.get(0);
-                    Log.d("Users", userEdina.toString());
                     User userMatyas=users.get(1);
 
+                    //we check the login information
                     if(email.matches(userEdina.getEmail()) && password.matches(userEdina.getPassword()))
                     {
                         Toast.makeText(getApplicationContext(), "Hello Edina!", Toast.LENGTH_SHORT).show();
+                        Log.d("Users", userEdina.toString());
+                        //passing the user id, and go to MenuActivity
                         Intent intent = new Intent(Login.this, Menu.class);
                         intent.putExtra("Id",1);
                         startActivity(intent);
@@ -68,6 +74,8 @@ public class Login extends AppCompatActivity {
 
                     {
                         Toast.makeText(getApplicationContext(), "Hello Matyas!", Toast.LENGTH_SHORT).show();
+                        Log.d("Users", userMatyas.toString());
+                        //passing the user id, and go to MenuActivity
                         Intent intent = new Intent(Login.this, Menu.class);
                         intent.putExtra("Id",2);
                         startActivity(intent);

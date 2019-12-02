@@ -28,38 +28,41 @@ public class ClientsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_clients);
 
         db = new DatabaseHelper(getApplicationContext());
-    //    db.deleteAllClients();
-
-   //     Client client = new Client(1,"Nick","nick@nick.com","www.nick.com","0745113408","Nick agency","UK",1);
-     //   Client client1 = new Client(2,"Nick","nick@nick.com","www.nick.com","0745113408","Nick agency","UK",1);
-
-       // db.createClient(client);
-        //db.createClient(client1);
+        /*
+        //we use this if we check the emulator of the device
+        db = new DatabaseHelper(getApplicationContext());
+        db.deleteAllClients();
+        Client client = new Client(1,"Nick","nick@nick.com","www.nick.com","0745113408","Nick agency","UK",1);
+        Client client1 = new Client(2,"Nick","nick@nick.com","www.nick.com","0745113408","Nick agency","UK",1);
+        db.createClient(client);
+        db.createClient(client1);*/
 
         Button bt_add = findViewById(R.id.bt_addContact);
 
+        //we get the user id from the MenuActivity
         Intent intentGet = getIntent();
         Bundle extras = intentGet.getExtras();
-       id = extras.getInt("Id");
+        id = extras.getInt("Id");
 
+        //we get all the inserted clients of the user
         allClients =  db.getUserClients(id);
         for(Client c:allClients)
         {
-            Log.d("ActualClients",c.toString());
+            Log.d("InsertedClients",c.toString());
         }
 
+        //button to add a new client
         bt_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //call the add client activity with resultcode
                 Intent intent = new Intent(ClientsActivity.this, AddClientActivity.class);
                 intent.putExtra("id", id);
                 startActivityForResult(intent,1);
-             /*   Intent intent = new Intent(ClientsActivity.this,AddClientActivity.class);
-                intent.putExtra("Id", id);
-                startActivity(intent);*/
             }
         });
 
+        //recyclerview setup
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewClients);
         recyclerView.addItemDecoration(new DividerItemDecoration(ClientsActivity.this,DividerItemDecoration.VERTICAL));
         adapter = new MyClientListAdapter(allClients,ClientsActivity.this,db);
@@ -78,21 +81,21 @@ public class ClientsActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
-        // check if the request code is same as what is passed  here it is 2
+
+        //checking the returned requestcode from the resultactivity
         if(requestCode==1)
         {
-            Log.d("Lekeres elotti",requestCode + "");
-       //     String message = data.getStringExtra("MESSAGE");
-        //    Log.d("Lekeres elotti",message);
-            allClients = db.getUserClients(id); for(Client c:allClients)
-        {
-            Log.d("Notify elotti",c.toString());
-        }
+            Log.d("Request Code:",requestCode + "");
+            allClients = db.getUserClients(id);
+            for(Client c:allClients)
+                {
+                    Log.d("List after insert",c.toString());
+                }
 
+            //adapter and recycler view refresh
             adapter = new MyClientListAdapter(allClients,ClientsActivity.this,db);
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-            //Log.d("Sikerult",message);
         }
     }
 

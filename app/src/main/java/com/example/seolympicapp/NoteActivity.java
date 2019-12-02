@@ -45,30 +45,37 @@ public class NoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
 
+        //format the date
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
         final String formattedDate = df.format(c);
 
+        //database connection
         db = new DatabaseHelper(getApplicationContext());
 
+        //get the user id
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-         final  int id = extras.getInt("Id");
+        final  int id = extras.getInt("Id");
+
         Button bt_addNew = findViewById(R.id.bt_add);
 
+        //we get all the Notes of the user
         allNotes = db.getUserNotes(id);
         for (Note note : allNotes) {
-            Log.d("Tag Name", note.toString());
+            Log.d("Notes", note.toString());
         }
+
+        //adding a new Note button
         bt_addNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+            //open the alertDialog function
             openDialog(id);
 
             }});
 
-
+        //RecyclerView setup
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.addItemDecoration(new DividerItemDecoration(NoteActivity.this,DividerItemDecoration.VERTICAL));
         adapter = new MyListAdapter(allNotes,NoteActivity.this,db);
@@ -88,20 +95,24 @@ public class NoteActivity extends AppCompatActivity {
 
     private void openDialog(final int id)
     {
-
+        //alertDialog view
         LayoutInflater inflater = LayoutInflater.from(NoteActivity.this);
         View subView = inflater.inflate(R.layout.alert_layout, null);
 
+        //get the alertDialog item
         final EditText et_note = subView.findViewById(R.id.update);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Add Your Note");
         builder.setView(subView);
         AlertDialog alertDialog = builder.create();
+
+        //adding a New Note to the database and refresh the adapter/recyclerView
         builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Log.d("Note",et_note.getText().toString());
+
+                Log.d("Note from the EditText",et_note.getText().toString());
                 Note note = new Note (checkMaxId()+1,et_note.getText().toString(),dateFormat(),id);
                 db.createNote(note);
                 allNotes.add(note);
@@ -112,6 +123,7 @@ public class NoteActivity extends AppCompatActivity {
         builder.show();
     }
 
+    //function to Format the Date
     private String dateFormat()
     {
         Date c = Calendar.getInstance().getTime();
@@ -121,6 +133,7 @@ public class NoteActivity extends AppCompatActivity {
         return formattedDate;
     }
 
+    //function to check the maxid of the notes in the database
     private int checkMaxId()
     {
         int id=0;

@@ -4,7 +4,7 @@
         android:title="@string/note" />
     <item android:id="@+id/reminder"
         android:title="Reminder" />
-    <item android:id="@+id/contacts"
+    <item android:id="@+id/clients"
         android:title="Clients" />
     <item android:id="@+id/email"
         android:title="@string/email" />

@@ -13,7 +13,6 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-
     private static final String DATABASE_NAME = "datamanager";
 
     //table names
@@ -29,13 +28,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String USER_PW="user_pw"; //password
 
     //note column names
-
     private static final String NOTE_ID="note_id";
     private static final String NOTE_NOTE="note_note";
     private static final String NOTE_TIMESTAMP="note_time";
 
     //client column names
-
     private static final String CLIENT_ID="client_id";
     private static final String CLIENT_NAME="client_name";
     private static final String CLIENT_EMAIL="client_email";
@@ -46,7 +43,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     //create table statements
-
     private static final String CREATE_TABLE_USER = "CREATE TABLE "
             + TABLE_USER + "(" + USER_ID + " INTEGER PRIMARY KEY," + USER_EMAIL
             + " TEXT," + USER_PW + " TEXT" + ")";
@@ -96,9 +92,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // insert row
         long id = db.insert(TABLE_USER, null, values);
-
         return id;
-
     }
 
     //get a User
@@ -107,8 +101,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery = "SELECT  * FROM " + TABLE_USER + " WHERE "
                 + USER_ID + " = " + user_id;
-
-      //  Log.e(LOG, selectQuery);
 
         Cursor c = db.rawQuery(selectQuery, null);
         if (c != null)
@@ -169,7 +161,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String selectQuery = "SELECT  * FROM " + TABLE_NOTE + " WHERE "
                 + USER_ID + " = " + user_id;
 
-        //  Log.e(LOG, selectQuery);
         Cursor c = db.rawQuery(selectQuery, null);
         if (c.moveToFirst()) {
             do {
@@ -202,12 +193,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return n;
     }
-    //update user : email+pw
 
+    //update user : email+pw
     public int updateUser(User user) {
 
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
 
         values.put(USER_EMAIL, user.getEmail());
@@ -221,9 +211,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public int updateNote(Note note) {
 
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
-
         values.put(NOTE_NOTE, note.getNote());
 
         // updating row
@@ -234,7 +222,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void deleteAllNotes(int user_id)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-
             db.delete(TABLE_NOTE, USER_ID + " = ?",
                     new String[] { String.valueOf(user_id) });
 
@@ -243,7 +230,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void deleteOneNote(int id)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-
         db.delete(TABLE_NOTE, NOTE_ID + " = ?",
                 new String[] { String.valueOf(id) });
 
@@ -251,20 +237,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void deleteUser(User user)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-
         db.delete(TABLE_USER, USER_ID + " = ?",
                 new String[] { String.valueOf(user.getId()) });
     }
     public void deleteAllUser()
     {
         SQLiteDatabase db = this.getWritableDatabase();
-
         db.execSQL("delete from " + TABLE_USER );
     }
     public void deleteAllNotes()
     {
         SQLiteDatabase db = this.getWritableDatabase();
-
         db.execSQL("delete from " + TABLE_NOTE );
     }
     // create Note
@@ -295,7 +278,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String selectQuery = "SELECT  * FROM " + TABLE_CLIENT + " WHERE "
                 + USER_ID + " = " + user_id;
 
-        //  Log.e(LOG, selectQuery);
         Cursor c = db.rawQuery(selectQuery, null);
         if (c.moveToFirst()) {
             do {
@@ -324,7 +306,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (c != null)
             c.moveToFirst();
 
-
         Client client = new Client();
         client.setUser_id(c.getInt(c.getColumnIndex(USER_ID)));
         client.setName(c.getString(c.getColumnIndex(CLIENT_NAME)));
@@ -333,7 +314,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         client.setTel(c.getString(c.getColumnIndex(CLIENT_TEL)));
         client.setCompany(c.getString(c.getColumnIndex(CLIENT_COMPANY)));
         client.setAddress(c.getString(c.getColumnIndex(CLIENT_ADDRESS)));
-
 
         return client;
     }
@@ -367,7 +347,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public int updateClient(Client client) {
 
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
 
         values.put(CLIENT_NAME,client.getName());
@@ -384,20 +363,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void deleteAllClients()
     {
         SQLiteDatabase db = this.getWritableDatabase();
-
         db.execSQL("delete from " + TABLE_CLIENT );
     }
     public void deleteAllClients(int user_id)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-
         db.delete(TABLE_CLIENT, USER_ID + " = ?",
                 new String[] { String.valueOf(user_id) });
     }
     public void deleteAClient(int client_id)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-
         db.delete(TABLE_CLIENT, CLIENT_ID + " = ?",
                 new String[] { String.valueOf(client_id) });
 

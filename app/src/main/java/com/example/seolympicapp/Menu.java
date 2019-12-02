@@ -11,14 +11,16 @@ import android.widget.Toast;
 
 public class Menu extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        //we get the id from the intent of the LoginActivity
         Intent mainIntent = getIntent();
         Bundle extras = mainIntent.getExtras();
-       final int id = extras.getInt("Id");
+        final int id = extras.getInt("Id");
 
         Button bt_notes = findViewById(R.id.button_notes);
         Button bt_clients = findViewById(R.id.button_clients);
@@ -26,7 +28,7 @@ public class Menu extends AppCompatActivity {
         Button bt_email = findViewById(R.id.button_email);
 
 
-
+        //Button menus
         bt_email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,30 +69,37 @@ public class Menu extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
+
+    //header Menu
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        Intent mainIntent = getIntent();
+       Intent mainIntent = getIntent();
         Bundle extras = mainIntent.getExtras();
         int id = extras.getInt("Id");
-    //    Toast.makeText(this, "Id " + id, Toast.LENGTH_SHORT).show();
 
-        Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
         switch (item.getItemId()) {
             case R.id.note:
+                Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
                  Intent intent = new Intent(Menu.this, NoteActivity.class);
                  intent.putExtra("Id",id);
                  startActivity(intent);
                 return true;
-            case R.id.contacts:
+            case R.id.clients:
+            //    Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
                 Intent intentContact = new Intent(Menu.this, ClientsActivity.class);
                 intentContact.putExtra("Id", id);
                 startActivity(intentContact);
+                return true;
             case R.id.email:
+                Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
                 Intent intentEmail = new Intent(Menu.this, EmailActivity.class);
                 startActivity(intentEmail);
+                return true;
             case R.id.reminder:
+                Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
                 Intent intentReminder = new Intent( Menu.this, ReminderActivity.class);
                 startActivity((intentReminder));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
