@@ -30,9 +30,9 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
     private DatabaseHelper db;
 
     public MyListAdapter(List<Note> noteList, Context context,DatabaseHelper db) {
-       this.noteList=noteList;
-       this.context = context;
-       this.db = db;
+        this.noteList=noteList;
+        this.context = context;
+        this.db = db;
     }
 
 
@@ -134,3 +134,4 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
         }
     }
 }
+

@@ -252,7 +252,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     // create Note
     public long createClient(Client client) {
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -291,7 +290,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 client.setAddress(c.getString(c.getColumnIndex(CLIENT_ADDRESS)));
                 client.setUser_id(c.getInt(c.getColumnIndex(USER_ID)));
                 clients.add(client);
-            }while (c.moveToNext());
+            } while (c.moveToNext());
+
         }
         return clients;
     }
@@ -318,7 +318,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return client;
     }
 
-    public List<Client> getAllClients() {
+    public List<Client> getAllClients(){
         List<Client> clients= new ArrayList<Client>();
         String selectQuery = "SELECT  * FROM " + TABLE_CLIENT;
 
